@@ -103,7 +103,7 @@ export function BoardOldTransactions({ direction, transactions }: Props) {
                     <Progress.Range />
                   </Progress.Track>
                   <Progress.ValueText w={'28px'}>
-                    {item.percentage}%
+                    {item.percentage.toFixed(1)}%
                   </Progress.ValueText>
                 </HStack>
               </Progress.Root>
@@ -152,7 +152,7 @@ export function BoardOldTransactions({ direction, transactions }: Props) {
                         <Progress.Range />
                       </Progress.Track>
                       <Progress.ValueText>
-                        {item.percentage}%
+                        {item.percentage.toFixed(1)}%
                       </Progress.ValueText>
                     </HStack>
                   </Progress.Root>

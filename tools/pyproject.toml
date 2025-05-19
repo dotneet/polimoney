@@ -8,7 +8,7 @@ license = "MIT" # または適切なライセンスを選択
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.10" # 要求するPythonのバージョン
+python = ">=3.10,<3.13" # 要求するPythonのバージョン
 pdf2image = "^1.17.0"
 google-generativeai = "^0.5.4" # 最新バージョンを確認して指定
 Pillow = "^10.3.0" # pdf2image や PIL.Image のために明示
@@ -17,6 +17,7 @@ beautifulsoup4 = "^4.13.4"
 tqdm = "^4.67.1"
 requests = "^2.32.3"
 tenacity = "^9.1.2"
+yomitoku = "^0.9.1"
 
 [tool.poetry.group.dev.dependencies]
 # 開発時に便利なツールがあればここに追加 (例: black, flake8, pytest)

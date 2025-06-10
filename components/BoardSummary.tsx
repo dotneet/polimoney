@@ -1,5 +1,4 @@
 'use client';
-
 import { BoardChart } from '@/components/BoardChart';
 import { BoardContainer } from '@/components/BoardContainer';
 import type { Flow, Profile, Report } from '@/models/type';
@@ -14,8 +13,10 @@ import {
   Stat,
   Text,
 } from '@chakra-ui/react';
+import html2canvas from 'html2canvas';
 import { LandmarkIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 type Props = {
   profile: Profile;
@@ -26,8 +27,29 @@ type Props = {
 
 export function BoardSummary({ profile, report, otherReports, flows }: Props) {
   const router = useRouter();
+  const [copied, setCopied] = useState(false);
   // const [selectedTab, setSelectedTab] = useState('amount')
-
+  const handleCopyImage = async () => {
+    const button = document.getElementById('copy-image-btn');
+    if (button) button.style.display = 'none'; // ボタンを非表示
+    const element = document.getElementById('summary');
+    if (!element) return;
+    const canvas = await html2canvas(element, { scale: 3 });
+    canvas.toBlob(async (blob) => {
+      if (blob) {
+        try {
+          await navigator.clipboard.write([
+            new window.ClipboardItem({ 'image/png': blob }),
+          ]);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 3000);
+        } catch (e) {
+          alert('コピーに失敗しました');
+        }
+      }
+      if (button) button.style.display = ''; // ボタンを再表示
+    });
+  };
   return (
     <BoardContainer id={'summary'}>
       {/* プロフィール */}
@@ -173,6 +195,59 @@ export function BoardSummary({ profile, report, otherReports, flows }: Props) {
       {/*</Box>*/}
       {/* チャート */}
       <BoardChart flows={flows} />
+      <Box mb={3} display="flex" justifyContent="flex-end">
+        <button
+          type="button"
+          id="copy-image-btn"
+          onClick={handleCopyImage}
+          style={{
+            border: '1px solid #ccc',
+            borderRadius: '6px',
+            padding: '8px 16px',
+            background: '#fff',
+            cursor: 'pointer',
+            transition: 'background 0.2s, border-color 0.2s',
+          }}
+          onMouseOver={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = '#f5f5f5';
+            (e.currentTarget as HTMLButtonElement).style.borderColor = '#888';
+          }}
+          onFocus={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = '#f5f5f5';
+            (e.currentTarget as HTMLButtonElement).style.borderColor = '#888';
+          }}
+          onMouseOut={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = '#fff';
+            (e.currentTarget as HTMLButtonElement).style.borderColor = '#ccc';
+          }}
+          onBlur={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = '#fff';
+            (e.currentTarget as HTMLButtonElement).style.borderColor = '#ccc';
+          }}
+        >
+          {copied ? (
+            <>
+              <svg
+                width="20"
+                height="20"
+                fill="#38a169"
+                viewBox="0 0 20 20"
+                role="img"
+                aria-label="コピー完了"
+              >
+                <title>コピー完了</title>
+                <path
+                  fillRule="evenodd"
+                  d="M16.707 6.293a1 1 0 010 1.414l-7.004 7.004a1 1 0 01-1.414 0l-3.004-3.004a1 1 0 111.414-1.414l2.297 2.297 6.297-6.297a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </>
+          ) : (
+            <>画像としてコピー</>
+          )}
+        </button>
+      </Box>
     </BoardContainer>
   );
 }

@@ -226,7 +226,7 @@ export function BoardSummary({ profile, report, otherReports, flows }: Props) {
           }}
         >
           {copied ? (
-            <>
+            <span style={{ display: 'inline-flex', alignItems: 'center' }}>
               <svg
                 width="20"
                 height="20"
@@ -234,6 +234,7 @@ export function BoardSummary({ profile, report, otherReports, flows }: Props) {
                 viewBox="0 0 20 20"
                 role="img"
                 aria-label="コピー完了"
+                style={{ verticalAlign: 'middle' }}
               >
                 <title>コピー完了</title>
                 <path
@@ -242,7 +243,12 @@ export function BoardSummary({ profile, report, otherReports, flows }: Props) {
                   clipRule="evenodd"
                 />
               </svg>
-            </>
+              <span
+                style={{ marginLeft: 8, color: '#38a169', fontWeight: 500 }}
+              >
+                コピーしました
+              </span>
+            </span>
           ) : (
             <>画像としてコピー</>
           )}

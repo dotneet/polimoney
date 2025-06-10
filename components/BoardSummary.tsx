@@ -227,30 +227,102 @@ export function BoardSummary({ profile, report, otherReports, flows }: Props) {
         >
           {copied ? (
             <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+              {/* コピー済みアイコン（チェックマーク） */}
               <svg
-                width="20"
-                height="20"
-                fill="#38a169"
-                viewBox="0 0 20 20"
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
                 role="img"
-                aria-label="コピー完了"
-                style={{ verticalAlign: 'middle' }}
+                aria-label="コピー完了アイコン"
               >
-                <title>コピー完了</title>
+                <title>コピー完了アイコン</title>
+                <defs>
+                  <linearGradient
+                    id="copied-gradient"
+                    x1="0"
+                    y1="0"
+                    x2="28"
+                    y2="0"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stopColor="#FDD2F8" />
+                    <stop offset="1" stopColor="#A6D1FF" />
+                  </linearGradient>
+                </defs>
+                <circle cx="14" cy="14" r="14" fill="url(#copied-gradient)" />
                 <path
-                  fillRule="evenodd"
-                  d="M16.707 6.293a1 1 0 010 1.414l-7.004 7.004a1 1 0 01-1.414 0l-3.004-3.004a1 1 0 111.414-1.414l2.297 2.297 6.297-6.297a1 1 0 011.414 0z"
-                  clipRule="evenodd"
+                  d="M8 15l4 4 8-8"
+                  stroke="#fff"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
+
               <span
-                style={{ marginLeft: 8, color: '#38a169', fontWeight: 500 }}
+                style={{
+                  marginLeft: 8,
+                  color: '#A6D1FF',
+                  fontWeight: 500,
+                  width: 140,
+                  height: 28,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                }}
               >
                 コピーしました
               </span>
             </span>
           ) : (
-            <>画像としてコピー</>
+            <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+              {/* コピーアイコン */}
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                role="img"
+                aria-label="コピーアイコン"
+              >
+                <title>コピーアイコン</title>
+                <rect
+                  x="4"
+                  y="7"
+                  width="10"
+                  height="10"
+                  rx="2"
+                  stroke="#555"
+                  strokeWidth="2"
+                />
+                <rect
+                  x="7"
+                  y="5"
+                  width="10"
+                  height="10"
+                  rx="2"
+                  stroke="#555"
+                  strokeWidth="2"
+                  opacity="0.5"
+                />
+              </svg>
+
+              <span
+                style={{
+                  marginLeft: 8,
+                  width: 140,
+                  height: 28,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                }}
+              >
+                画像としてコピー
+              </span>
+            </span>
           )}
         </button>
       </Box>

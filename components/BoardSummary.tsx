@@ -217,7 +217,11 @@ export function BoardSummary({
       ) : (
         <BoardChart flows={flows} />
       )}
-      <Box mb={3} display="flex" justifyContent="flex-end">
+      <Box
+        mb={3}
+        display={{ base: 'none', md: 'flex' }}
+        justifyContent="flex-end"
+      >
         <button
           type="button"
           id="copy-image-btn"

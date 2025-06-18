@@ -114,7 +114,7 @@ const flows: Flow[] = [
 const transactions: Transaction[] = [
   {
     id: '4-1',
-    direction: '収入',
+    direction: 'income',
     category: '借入金',
     purpose: '安野貴博',
     name: '安野貴博',
@@ -123,7 +123,7 @@ const transactions: Transaction[] = [
   },
   {
     id: '7-1',
-    direction: '収入',
+    direction: 'income',
     category: '個人からの寄附',
     purpose: '個人からの寄附',
     name: '個人からの寄附',
@@ -132,7 +132,7 @@ const transactions: Transaction[] = [
   },
   {
     id: '14-1',
-    direction: '支出',
+    direction: 'expense',
     category: '経常経費',
     purpose: 'コミュニケーションツール費用(slack)',
     name: 'コミュニケーションツール費用(slack)',
@@ -141,7 +141,7 @@ const transactions: Transaction[] = [
   },
   {
     id: '14-2',
-    direction: '支出',
+    direction: 'expense',
     category: '経常経費',
     purpose: '献金システム手数料(ボネクタ)',
     name: '献金システム手数料(ボネクタ)',
@@ -150,7 +150,7 @@ const transactions: Transaction[] = [
   },
   {
     id: '14-3',
-    direction: '支出',
+    direction: 'expense',
     category: '経常経費',
     purpose: 'その他の経常経費',
     name: 'その他の経常経費',
@@ -159,7 +159,7 @@ const transactions: Transaction[] = [
   },
   {
     id: '15-1',
-    direction: '支出',
+    direction: 'expense',
     category: '選挙関係費',
     purpose: '寄付',
     name: '寄付',
@@ -168,7 +168,7 @@ const transactions: Transaction[] = [
   },
   {
     id: '15-2',
-    direction: '支出',
+    direction: 'expense',
     category: '組織活動費',
     purpose: 'ブロードリスニングAPI利用料(X)',
     name: 'ブロードリスニングAPI利用料(X)',
@@ -177,7 +177,7 @@ const transactions: Transaction[] = [
   },
   {
     id: '15-3',
-    direction: '支出',
+    direction: 'expense',
     category: '組織活動費',
     purpose: 'ブロードリスニングAPI利用料(OpenAI)',
     name: 'ブロードリスニングAPI利用料(OpenAI)',
@@ -186,7 +186,7 @@ const transactions: Transaction[] = [
   },
   {
     id: '15-4',
-    direction: '支出',
+    direction: 'expense',
     category: '組織活動費',
     purpose: '政策広報用音声コンテンツ作成API利用料(ElevenLabs)',
     name: '政策広報用音声コンテンツ作成API利用料(ElevenLabs)',
@@ -195,7 +195,7 @@ const transactions: Transaction[] = [
   },
   {
     id: '15-5',
-    direction: '支出',
+    direction: 'expense',
     category: '組織活動費',
     purpose: 'その他の組織活動費',
     name: 'その他の組織活動費',
@@ -204,7 +204,7 @@ const transactions: Transaction[] = [
   },
   {
     id: '15-6',
-    direction: '支出',
+    direction: 'expense',
     category: 'その他の経費',
     purpose: '借入金の返済',
     name: '借入金の返済',

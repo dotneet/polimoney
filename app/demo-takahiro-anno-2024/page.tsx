@@ -24,7 +24,7 @@ export default async function Page() {
         direction={'income'}
         total={reportData.report.totalIncome}
         transactions={reportData.transactions.filter(
-          (t) => t.direction === '収入',
+          (t) => t.direction === 'income',
         )}
         showPurpose={true}
         showDate={false}
@@ -33,7 +33,7 @@ export default async function Page() {
         direction={'expense'}
         total={reportData.report.totalExpense}
         transactions={reportData.transactions.filter(
-          (t) => t.direction === '支出',
+          (t) => t.direction === 'expense',
         )}
         showPurpose={false}
         showDate={false}

@@ -269,7 +269,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     // 収入
     {
       id: 'i1',
-      direction: '収入',
+      direction: 'income',
       category: '前年繰越',
       purpose: '前年からの繰越額',
       name: '前年からの繰越額',
@@ -278,7 +278,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     },
     {
       id: 'i2',
-      direction: '収入',
+      direction: 'income',
       category: '党費・会費',
       purpose: '個人の負担する党費又は会費',
       name: '個人の負担する党費又は会費',
@@ -287,7 +287,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     },
     {
       id: 'i3',
-      direction: '収入',
+      direction: 'income',
       category: '交付金',
       purpose: '本部又は支部から供与された交付金',
       name: '本部又は支部から供与された交付金',
@@ -297,7 +297,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     // 支出
     {
       id: 'e5',
-      direction: '支出',
+      direction: 'expense',
       category: '政治活動費',
       purpose: '組織活動費',
       name: '組織活動費',
@@ -309,7 +309,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     // 収入
     {
       id: 'i1',
-      direction: '収入',
+      direction: 'income',
       category: '前年繰越',
       purpose: '前年からの繰越額',
       name: '前年からの繰越額',
@@ -318,7 +318,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     },
     {
       id: 'i2',
-      direction: '収入',
+      direction: 'income',
       category: '党費・会費',
       purpose: '個人の負担する党費又は会費',
       name: '個人の負担する党費又は会費',
@@ -327,7 +327,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     },
     {
       id: 'i3',
-      direction: '収入',
+      direction: 'income',
       category: '交付金',
       purpose: '本部又は支部から供与された交付金',
       name: '本部又は支部から供与された交付金',
@@ -337,7 +337,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     // 支出
     {
       id: 'e5',
-      direction: '支出',
+      direction: 'expense',
       category: '政治活動費',
       purpose: '組織活動費',
       name: '組織活動費',
@@ -349,7 +349,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     // 収入
     {
       id: 'i1',
-      direction: '収入',
+      direction: 'income',
       category: '前年繰越',
       purpose: '前年からの繰越額',
       name: '前年からの繰越額',
@@ -358,7 +358,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     },
     {
       id: 'i2',
-      direction: '収入',
+      direction: 'income',
       category: '党費・会費',
       purpose: '個人の負担する党費又は会費',
       name: '個人の負担する党費又は会費',
@@ -367,7 +367,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     },
     {
       id: 'i3',
-      direction: '収入',
+      direction: 'income',
       category: '寄附',
       purpose: '寄附',
       name: '寄附',
@@ -376,7 +376,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     },
     {
       id: 'i4',
-      direction: '収入',
+      direction: 'income',
       category: '交付金',
       purpose: '本部又は支部から供与された交付金',
       name: '本部又は支部から供与された交付金',
@@ -386,7 +386,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     // 支出
     {
       id: 'e6',
-      direction: '支出',
+      direction: 'expense',
       category: '政治活動費',
       purpose: '選挙関係費',
       name: '選挙関係費',
@@ -395,7 +395,7 @@ const transactionsByYear: Record<number, Transaction[]> = {
     },
     {
       id: 'e10',
-      direction: '支出',
+      direction: 'expense',
       category: '政治活動費',
       purpose: 'その他の経費',
       name: 'その他の経費',

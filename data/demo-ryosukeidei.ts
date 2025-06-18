@@ -200,7 +200,7 @@ const flows: Flow[] = [
 const transactions: Transaction[] = [
   {
     id: 'i1',
-    direction: '収入',
+    direction: 'income',
     category: '前年繰越',
     purpose: '前年からの繰越額',
     name: '前年からの繰越額',
@@ -209,7 +209,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'i2',
-    direction: '収入',
+    direction: 'income',
     category: '党費・会費',
     purpose: '個人の負担する党費又は会費',
     name: '個人の負担する党費又は会費',
@@ -218,7 +218,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'i3',
-    direction: '収入',
+    direction: 'income',
     category: '寄附',
     purpose: '個人からの寄附',
     name: '個人からの寄附',
@@ -227,7 +227,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'i4',
-    direction: '収入',
+    direction: 'income',
     category: '寄附',
     purpose: '法人その他の団体からの寄附',
     name: '法人その他の団体からの寄附',
@@ -236,7 +236,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'i5',
-    direction: '収入',
+    direction: 'income',
     category: '寄附',
     purpose: '政治団体からの寄附',
     name: '政治団体からの寄附',
@@ -245,7 +245,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'i6',
-    direction: '収入',
+    direction: 'income',
     category: '交付金',
     purpose: '本部又は支部から供与された交付金',
     name: '本部又は支部から供与された交付金',
@@ -254,7 +254,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'i7',
-    direction: '収入',
+    direction: 'income',
     category: 'その他収入',
     purpose: 'その他の収入',
     name: 'その他の収入',
@@ -263,7 +263,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'e1',
-    direction: '支出',
+    direction: 'expense',
     category: '経常経費',
     purpose: '人件費',
     name: '人件費',
@@ -272,7 +272,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'e2',
-    direction: '支出',
+    direction: 'expense',
     category: '経常経費',
     purpose: '光熱水費',
     name: '光熱水費',
@@ -281,7 +281,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'e3',
-    direction: '支出',
+    direction: 'expense',
     category: '経常経費',
     purpose: '備品・消耗品費',
     name: '備品・消耗品費',
@@ -290,7 +290,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'e4',
-    direction: '支出',
+    direction: 'expense',
     category: '経常経費',
     purpose: '事務所費',
     name: '事務所費',
@@ -299,7 +299,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'e5',
-    direction: '支出',
+    direction: 'expense',
     category: '政治活動費',
     purpose: '組織活動費',
     name: '組織活動費',
@@ -308,7 +308,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'e6',
-    direction: '支出',
+    direction: 'expense',
     category: '政治活動費',
     purpose: '選挙関係費',
     name: '選挙関係費',
@@ -317,7 +317,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'e7',
-    direction: '支出',
+    direction: 'expense',
     category: '機関紙誌の発行その他の事業費',
     purpose: '宣伝事業費',
     name: '宣伝事業費',
@@ -326,7 +326,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'e8',
-    direction: '支出',
+    direction: 'expense',
     category: '政治活動費',
     purpose: '調査研究費',
     name: '調査研究費',
@@ -335,7 +335,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'e9',
-    direction: '支出',
+    direction: 'expense',
     category: '政治活動費',
     purpose: '寄附・交付金',
     name: '寄附・交付金',
@@ -344,7 +344,7 @@ const transactions: Transaction[] = [
   },
   {
     id: 'e10',
-    direction: '支出',
+    direction: 'expense',
     category: '政治活動費',
     purpose: 'その他の経費',
     name: 'その他の経費',

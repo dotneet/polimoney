@@ -6,21 +6,19 @@ import { BoardTransactions } from '@/components/BoardTransactions';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Notice } from '@/components/Notice';
-import type { Flow, Profile, Report, Transaction } from '@/models/type';
+import type {
+  AccountingReports,
+  Flow,
+  Profile,
+  Report,
+  Transaction,
+} from '@/models/type';
 import { Box } from '@chakra-ui/react';
 import { notFound } from 'next/navigation';
 
-interface ReportData {
-  id: string;
-  profile: Profile;
-  report: Report;
-  reports: Report[];
-  flows: Flow[];
-  incomeTransactions: Transaction[];
-  expenseTransactions: Transaction[];
-}
-
-async function getReportData(id: string): Promise<ReportData | null> {
+async function getAccountingReports(
+  id: string,
+): Promise<AccountingReports | null> {
   try {
     const filePath = path.join(
       process.cwd(),
@@ -59,33 +57,46 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const data = await getReportData(id);
+  const data = await getAccountingReports(id);
 
   if (!data) {
     notFound();
   }
-
+  const reportData = data.datas.find(
+    (d) => d.report.id === data.latestReportId,
+  );
+  if (!reportData) {
+    notFound();
+  }
   return (
     <Box>
       <Header />
       <BoardSummary
         profile={data.profile}
-        report={data.report}
-        otherReports={data.reports}
-        flows={data.flows}
+        report={reportData.report}
+        otherReports={data.datas.map((d) => d.report)}
+        flows={reportData.flows}
         useFixedBoardChart={true}
       />
       <BoardTransactions
         direction={'income'}
-        total={data.report.totalIncome}
-        transactions={data.incomeTransactions}
+        total={reportData.report.totalIncome}
+        transactions={reportData.transactions.filter(
+          (t) => t.direction === 'income',
+        )}
+        showPurpose={true}
+        showDate={true}
       />
       <BoardTransactions
         direction={'expense'}
-        total={data.report.totalExpense}
-        transactions={data.expenseTransactions}
+        total={reportData.report.totalExpense}
+        transactions={reportData.transactions.filter(
+          (t) => t.direction === 'expense',
+        )}
+        showPurpose={true}
+        showDate={true}
       />
-      <BoardMetadata report={data.report} />
+      <BoardMetadata report={reportData.report} />
       <Notice />
       <Footer />
     </Box>

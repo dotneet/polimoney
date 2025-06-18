@@ -25,14 +25,16 @@ export type Report = {
 export type Flow = {
   id: string; // ID
   name: string; // 項目名
-  direction: string; // 収入or支出
+  direction: TransactionDirection; // 収入or支出
   value: number; // 金額
   parent: string | null; // 親要素のID
 };
 
+export type TransactionDirection = 'income' | 'expense';
+
 export type Transaction = {
   id: string;
-  direction: string;
+  direction: TransactionDirection;
   category: string;
   subCategory?: string;
   purpose: string;

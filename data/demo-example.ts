@@ -77,7 +77,7 @@ const flows: Flow[] = [
 const transactions: Transaction[] = [
   {
     id: '7-1-1',
-    direction: '収入',
+    direction: 'income',
     category: '寄附',
     subCategory: '個人',
     purpose: '',
@@ -87,7 +87,7 @@ const transactions: Transaction[] = [
   },
   {
     id: '14-3-13',
-    direction: '支出',
+    direction: 'expense',
     category: '経常経費',
     subCategory: '人件費',
     purpose: '人件費',

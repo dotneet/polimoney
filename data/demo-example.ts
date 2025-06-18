@@ -1,4 +1,10 @@
-import type { Flow, Profile, Report, Transaction } from '@/models/type';
+import type {
+  AccountingReports,
+  Flow,
+  Profile,
+  Report,
+  Transaction,
+} from '@/models/type';
 
 const profile: Profile = {
   name: 'テスト太郎',
@@ -91,11 +97,17 @@ const transactions: Transaction[] = [
   },
 ];
 
-export default {
-  id: report.id,
+const data: AccountingReports = {
+  id: 'demo-example',
+  latestReportId: 'demo-example',
   profile,
-  report,
-  reports,
-  flows,
-  transactions,
+  datas: [
+    {
+      report: report,
+      flows: flows,
+      transactions: transactions,
+    },
+  ],
 };
+
+export default data;

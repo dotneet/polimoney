@@ -34,19 +34,20 @@ export type Transaction = {
   id: string;
   direction: string;
   category: string;
-  subCategory: string;
+  subCategory?: string;
   purpose: string;
   name: string;
   amount: number;
   date: string;
 };
 
-// deprecated - Transaction を利用してください
-export type OldTransaction = {
-  id: string; // ID
-  name: string; // 項目名
-  category: string; // カテゴリー名
-  date: string; // 日付
-  value: number; // 金額
-  percentage: number; // 割合
+export type AccountingReports = {
+  id: string;
+  latestReportId: string;
+  profile: Profile;
+  datas: {
+    report: Report;
+    flows: Flow[];
+    transactions: Transaction[];
+  }[];
 };

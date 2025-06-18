@@ -26,9 +26,17 @@ type Props = {
   direction: 'income' | 'expense';
   total: number;
   transactions: Transaction[];
+  showPurpose: boolean;
+  showDate: boolean;
 };
 
-export function BoardTransactions({ direction, total, transactions }: Props) {
+export function BoardTransactions({
+  direction,
+  total,
+  transactions,
+  showPurpose,
+  showDate,
+}: Props) {
   // const [selectedTab, setSelectedTab] = useState('name')
   const [page, setPage] = useState(1);
   const pageSize = 10;
@@ -97,11 +105,12 @@ export function BoardTransactions({ direction, total, transactions }: Props) {
             <Box w={'full'}>
               <HStack mb={2}>
                 <Badge>
-                  {item.category}：{item.subCategory}
+                  {item.category}
+                  {item.subCategory && <span>：{item.subCategory}</span>}
                 </Badge>
                 <Text fontSize={'xs'}>{item.date}</Text>
               </HStack>
-              {direction === 'expense' && (
+              {direction === 'expense' && showPurpose && (
                 <Text fontSize={'xs'} fontWeight={'bold'}>
                   {item.purpose}
                 </Text>
@@ -136,7 +145,7 @@ export function BoardTransactions({ direction, total, transactions }: Props) {
         <Table.Root size={'lg'}>
           <Table.Header>
             <Table.Row fontSize={'sm'}>
-              {direction === 'expense' && (
+              {direction === 'expense' && showPurpose && (
                 <Table.ColumnHeader fontWeight={'bold'}>
                   目的
                 </Table.ColumnHeader>
@@ -151,20 +160,25 @@ export function BoardTransactions({ direction, total, transactions }: Props) {
                 金額
               </Table.ColumnHeader>
               <Table.ColumnHeader fontWeight={'bold'}>割合</Table.ColumnHeader>
-              <Table.ColumnHeader fontWeight={'bold'}>日付</Table.ColumnHeader>
+              {showDate && (
+                <Table.ColumnHeader fontWeight={'bold'}>
+                  日付
+                </Table.ColumnHeader>
+              )}
               {/*<Table.ColumnHeader w={'32px'} />*/}
             </Table.Row>
           </Table.Header>
           <Table.Body>
             {paginated.map((item) => (
               <Table.Row key={item.id} fontSize={'sm'}>
-                {direction === 'expense' && (
+                {direction === 'expense' && showPurpose && (
                   <Table.Cell fontWeight={'bold'}>{item.purpose}</Table.Cell>
                 )}
                 <Table.Cell fontWeight={'bold'}>{item.name}</Table.Cell>
                 <Table.Cell>
                   <Badge>
-                    {item.category}：{item.subCategory}
+                    {item.category}
+                    {item.subCategory && <span>：{item.subCategory}</span>}
                   </Badge>
                 </Table.Cell>
                 <Table.Cell fontWeight={'bold'} textAlign="end">
@@ -186,7 +200,7 @@ export function BoardTransactions({ direction, total, transactions }: Props) {
                     </HStack>
                   </Progress.Root>
                 </Table.Cell>
-                <Table.Cell>{item.date}</Table.Cell>
+                {showDate && <Table.Cell>{item.date}</Table.Cell>}
                 {/*<Table.Cell>*/}
                 {/*  <IconButton variant={'ghost'} size={'xs'}>*/}
                 {/*    <CircleChevronDownIcon className={direction} />*/}

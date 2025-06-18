@@ -8,26 +8,37 @@ import data from '@/data/demo-example';
 import { Box } from '@chakra-ui/react';
 
 export default async function Page() {
+  const reportData = data.datas[0];
+  const otherReports = data.datas.map((d) => d.report);
+
   return (
     <Box>
       <Header />
       <BoardSummary
         profile={data.profile}
-        report={data.report}
-        otherReports={data.reports}
-        flows={data.flows}
+        report={reportData.report}
+        otherReports={otherReports}
+        flows={reportData.flows}
       />
       <BoardTransactions
         direction={'income'}
-        total={data.report.totalIncome}
-        transactions={data.transactions.filter((t) => t.direction === '収入')}
+        total={reportData.report.totalIncome}
+        transactions={reportData.transactions.filter(
+          (t) => t.direction === 'income',
+        )}
+        showPurpose={true}
+        showDate={true}
       />
       <BoardTransactions
         direction={'expense'}
-        total={data.report.totalExpense}
-        transactions={data.transactions.filter((t) => t.direction === '支出')}
+        total={reportData.report.totalExpense}
+        transactions={reportData.transactions.filter(
+          (t) => t.direction === 'expense',
+        )}
+        showPurpose={true}
+        showDate={true}
       />
-      <BoardMetadata report={data.report} />
+      <BoardMetadata report={reportData.report} />
       <Notice />
       <Footer />
     </Box>

@@ -1,6 +1,12 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import type { Profile, Report, Transaction } from '@/models/type';
+import type {
+  AccountingReports,
+  Profile,
+  Report,
+  Transaction,
+  TransactionDirection,
+} from '@/models/type';
 
 // import { Summary, Flow, Transaction } from '../type';
 type Summary = {
@@ -55,16 +61,9 @@ type BasicInfo = {
   lastUpdate: string;
 };
 
-type OutputData = {
-  profile: Profile;
-  report: Report;
-  reports: Report[];
-  flows: Flow[];
-  incomeTransactions: Transaction[];
-  expenseTransactions: Transaction[];
-};
+type OutputData = AccountingReports;
 
-function convert(data: InputData): OutputData {
+function convert(data: InputData, outputId = 'converted-data'): OutputData {
   const incomeCategoryIds = data.categories
     .filter((c: InputCategory) => c.direction === 'income')
     .map((c: InputCategory) => c.id);
@@ -120,12 +119,11 @@ function convert(data: InputData): OutputData {
       id: t.id,
       name: t.name,
       date: t.date,
-      direction: 'income',
+      direction: 'income' as TransactionDirection,
       amount: t.value || 0,
       category: categoryIdToName[categoryIdToParentId[t.category_id]] || '',
       subCategory: categoryIdToName[t.category_id] || '',
-      purpose: '',
-      percentage: (t.value * 100.0) / totalIncome,
+      purpose: t.name,
     }),
   );
 
@@ -133,13 +131,12 @@ function convert(data: InputData): OutputData {
     (t: InputTransaction) => ({
       id: t.id,
       name: t.name,
-      direction: 'expense',
+      direction: 'expense' as TransactionDirection,
       date: t.date,
       amount: t.value || 0,
       category: categoryIdToName[categoryIdToParentId[t.category_id]] || '',
       subCategory: categoryIdToName[t.category_id],
-      purpose: '',
-      percentage: (t.value * 100.0) / totalExpense,
+      purpose: t.name,
     }),
   );
 
@@ -171,8 +168,9 @@ function convert(data: InputData): OutputData {
   if (rootFlow) {
     rootFlow.value /= 2;
   }
+  const reportId = `${outputId}-${data.year}`;
   const report: Report = {
-    id: 'TODO',
+    id: reportId,
     totalIncome: totalIncome,
     totalExpense: totalExpense,
     totalBalance: balanceTransaction ? balanceTransaction.value : 0,
@@ -187,18 +185,26 @@ function convert(data: InputData): OutputData {
     lastUpdate: data.basic_info.lastUpdate,
   };
 
+  const profile: Profile = {
+    name: data.basic_info.representative,
+    title: data.basic_info.representative,
+    party: data.basic_info.orgName,
+    image: '/demo-example.png',
+  };
+
+  const allTransactions = [...incomeTransactions, ...expenseTransactions];
+
   return {
-    profile: {
-      name: data.basic_info.representative,
-      title: data.basic_info.representative,
-      party: data.basic_info.orgName,
-      image: '/demo-example.png',
-    },
-    report: report,
-    reports: [report],
-    flows,
-    incomeTransactions,
-    expenseTransactions,
+    id: outputId,
+    latestReportId: reportId,
+    profile,
+    datas: [
+      {
+        report,
+        flows,
+        transactions: allTransactions,
+      },
+    ],
   };
 }
 
@@ -344,11 +350,13 @@ function validateInput(data: InputData): string[] {
 function parseArguments(): {
   inputFile: string;
   outputFile: string;
+  outputId: string;
   ignoreErrors: boolean;
 } {
   const args = process.argv.slice(2);
   let inputFile = '';
   let outputFile = '';
+  let outputId = 'converted-data';
   let ignoreErrors = false;
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '-i' && i + 1 < args.length) {
@@ -357,6 +365,9 @@ function parseArguments(): {
     } else if (args[i] === '-o' && i + 1 < args.length) {
       outputFile = args[i + 1];
       i++;
+    } else if (args[i] === '--id' && i + 1 < args.length) {
+      outputId = args[i + 1];
+      i++;
     } else if (args[i] === '--ignore-errors') {
       ignoreErrors = true;
     }
@@ -364,17 +375,17 @@ function parseArguments(): {
 
   if (!inputFile || !outputFile) {
     console.error(
-      '使用方法: node generator.js -i <入力JSONファイル> -o <出力JSONファイル> [--ignore-errors]',
+      '使用方法: node generator.js -i <入力JSONファイル> -o <出力JSONファイル> [--id <データID>] [--ignore-errors]',
     );
     process.exit(1);
   }
 
-  return { inputFile, outputFile, ignoreErrors };
+  return { inputFile, outputFile, outputId, ignoreErrors };
 }
 
 function main(): void {
   try {
-    const { inputFile, outputFile, ignoreErrors } = parseArguments();
+    const { inputFile, outputFile, outputId, ignoreErrors } = parseArguments();
 
     const inputPath = path.resolve(inputFile);
     const rawData = fs.readFileSync(inputPath, 'utf8');
@@ -390,7 +401,7 @@ function main(): void {
       }
     }
 
-    const convertedData = convert(data);
+    const convertedData = convert(data, outputId);
 
     const outputPath = path.resolve(outputFile);
     fs.writeFileSync(outputPath, JSON.stringify(convertedData, null, 2));

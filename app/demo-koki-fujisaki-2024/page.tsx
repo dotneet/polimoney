@@ -1,34 +1,46 @@
 import { BoardMetadata } from '@/components/BoardMetadata';
-import { BoardOldTransactions } from '@/components/BoardOldTransactions';
 import { BoardSummary } from '@/components/BoardSummary';
+import { BoardTransactions } from '@/components/BoardTransactions';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Notice } from '@/components/Notice';
-import { getDataByYear } from '@/data/demo-kokifujisaki';
+import data, { getDataByYear } from '@/data/demo-kokifujisaki';
 import { Box } from '@chakra-ui/react';
 
 export default async function Page() {
   // 2024年のデータを取得
-  const data = getDataByYear(2024);
+  const yearData = getDataByYear(2024);
+  const reportData = yearData.datas[0];
+  const allReports = data.datas.map((d) => d.report);
 
   return (
     <Box>
       <Header />
       <BoardSummary
-        profile={data.profile}
-        report={data.report}
-        otherReports={data.reports}
-        flows={data.flows}
+        profile={yearData.profile}
+        report={reportData.report}
+        otherReports={allReports}
+        flows={reportData.flows}
       />
-      <BoardOldTransactions
+      <BoardTransactions
         direction={'income'}
-        transactions={data.incomeTransactions}
+        total={reportData.report.totalIncome}
+        transactions={reportData.transactions.filter(
+          (t) => t.direction === 'income',
+        )}
+        showPurpose={false}
+        showDate={false}
       />
-      <BoardOldTransactions
+      <BoardTransactions
         direction={'expense'}
-        transactions={data.expenseTransactions}
+        total={reportData.report.totalExpense}
+        transactions={reportData.transactions.filter(
+          (t) => t.direction === 'expense',
+        )}
+        showPurpose={false}
+        showDate={false}
       />
-      <BoardMetadata report={data.report} />
+      <BoardMetadata report={reportData.report} />
       <Notice />
       <Footer />
     </Box>

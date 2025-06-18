@@ -1,4 +1,10 @@
-import type { Flow, Profile, Report, Transaction } from '@/models/type';
+import type {
+  AccountingReports,
+  Flow,
+  Profile,
+  Report,
+  Transaction,
+} from '@/models/type';
 
 const profile: Profile = {
   name: 'テスト太郎',
@@ -71,7 +77,7 @@ const flows: Flow[] = [
 const transactions: Transaction[] = [
   {
     id: '7-1-1',
-    direction: '収入',
+    direction: 'income',
     category: '寄附',
     subCategory: '個人',
     purpose: '',
@@ -81,7 +87,7 @@ const transactions: Transaction[] = [
   },
   {
     id: '14-3-13',
-    direction: '支出',
+    direction: 'expense',
     category: '経常経費',
     subCategory: '人件費',
     purpose: '人件費',
@@ -91,11 +97,17 @@ const transactions: Transaction[] = [
   },
 ];
 
-export default {
-  id: report.id,
+const data: AccountingReports = {
+  id: 'demo-example',
+  latestReportId: 'demo-example',
   profile,
-  report,
-  reports,
-  flows,
-  transactions,
+  datas: [
+    {
+      report: report,
+      flows: flows,
+      transactions: transactions,
+    },
+  ],
 };
+
+export default data;

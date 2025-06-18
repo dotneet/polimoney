@@ -36,7 +36,7 @@ export default function Page() {
       <Header />
       <SimpleGrid columns={{ base: 1, lg: 2 }} gap={5} mb={5} p={2}>
         {results.map((result) => (
-          <Link href={`/${result.id}`} key={result.id}>
+          <Link href={`/${result.latestReportId}`} key={result.latestReportId}>
             <Card.Root flexDirection={'row'} boxShadow={'xs'} border={'none'}>
               <Image
                 objectFit="cover"

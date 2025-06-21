@@ -9,6 +9,7 @@ import demoExample from '@/data/demo-example';
 import demoKokiFujisaki from '@/data/demo-kokifujisaki';
 import demoRyosukeIdei from '@/data/demo-ryosukeidei';
 import demoTakahiroAnno from '@/data/demo-takahiroanno';
+import type { ProfileList } from '@/models/type';
 import {
   Badge,
   Box,
@@ -21,7 +22,12 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 
-const results = [
+type Entry = {
+  id: string;
+  latestReportId: string;
+  profile: ProfileList;
+};
+const entries: Entry[] = [
   demoTakahiroAnno,
   demoRyosukeIdei,
   demoKokiFujisaki,
@@ -44,14 +50,14 @@ export default function Page() {
     <Box>
       <Header />
       <SimpleGrid columns={{ base: 1, lg: 2 }} gap={5} mb={5} p={2}>
-        {results.map((result) => (
+        {entries.map((entry) => (
           <Link
             href={
-              !result.latestReportId.startsWith(comingSoonId)
-                ? `/${result.latestReportId}`
+              !entry.latestReportId.startsWith(comingSoonId)
+                ? `/${entry.latestReportId}`
                 : '#'
             }
-            key={result.latestReportId}
+            key={entry.latestReportId}
           >
             <Card.Root
               flexDirection={'row'}
@@ -62,27 +68,27 @@ export default function Page() {
               <Image
                 objectFit={'cover'}
                 maxW={'130px'}
-                src={result.profile.image}
-                alt={result.profile.name}
+                src={entry.profile.image}
+                alt={entry.profile.name}
                 borderTopLeftRadius={'md'}
                 borderBottomLeftRadius={'md'}
               />
               <Box>
                 <Card.Body>
                   <Stack gap={0}>
-                    <Text fontSize={'xs'}>{result.profile.title}</Text>
+                    <Text fontSize={'xs'}>{entry.profile.title}</Text>
                     <Text fontSize={'2xl'} fontWeight={'bold'}>
-                      {result.profile.name}
+                      {entry.profile.name}
                     </Text>
                     <HStack mt={1}>
-                      {result.profile.party && (
+                      {entry.profile.party && (
                         <Badge variant={'outline'} colorPalette={'red'}>
-                          {result.profile.party}
+                          {entry.profile.party}
                         </Badge>
                       )}
-                      {result.profile.district && (
+                      {entry.profile.district && (
                         <Badge variant={'outline'}>
-                          {result.profile.district}
+                          {entry.profile.district}
                         </Badge>
                       )}
                     </HStack>

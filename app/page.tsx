@@ -1,6 +1,10 @@
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Notice } from '@/components/Notice';
+import demoComingsoon, {
+  comingSoonId,
+  comingSoonNum,
+} from '@/data/demo-comingsoon';
 import demoExample from '@/data/demo-example';
 import demoKokiFujisaki from '@/data/demo-kokifujisaki';
 import demoRyosukeIdei from '@/data/demo-ryosukeidei';
@@ -22,6 +26,11 @@ const results = [
   demoRyosukeIdei,
   demoKokiFujisaki,
   demoExample,
+  ...Array.from({ length: comingSoonNum }, (_, i) => ({
+    ...demoComingsoon,
+    id: `${comingSoonId}-${i}`,
+    latestReportId: `${comingSoonId}-${i}`,
+  })),
 ];
 
 export const metadata = {
@@ -36,15 +45,27 @@ export default function Page() {
       <Header />
       <SimpleGrid columns={{ base: 1, lg: 2 }} gap={5} mb={5} p={2}>
         {results.map((result) => (
-          <Link href={`/${result.latestReportId}`} key={result.latestReportId}>
-            <Card.Root flexDirection={'row'} boxShadow={'xs'} border={'none'}>
+          <Link
+            href={
+              !result.latestReportId.startsWith(comingSoonId)
+                ? `/${result.latestReportId}`
+                : '#'
+            }
+            key={result.latestReportId}
+          >
+            <Card.Root
+              flexDirection={'row'}
+              boxShadow={'xs'}
+              border={'none'}
+              alignItems={'center'}
+            >
               <Image
-                objectFit="cover"
-                maxW="130px"
+                objectFit={'cover'}
+                maxW={'130px'}
                 src={result.profile.image}
                 alt={result.profile.name}
-                borderTopLeftRadius="md"
-                borderBottomLeftRadius="md"
+                borderTopLeftRadius={'md'}
+                borderBottomLeftRadius={'md'}
               />
               <Box>
                 <Card.Body>
@@ -54,9 +75,11 @@ export default function Page() {
                       {result.profile.name}
                     </Text>
                     <HStack mt={1}>
-                      <Badge variant={'outline'} colorPalette={'red'}>
-                        {result.profile.party}
-                      </Badge>
+                      {result.profile.party && (
+                        <Badge variant={'outline'} colorPalette={'red'}>
+                          {result.profile.party}
+                        </Badge>
+                      )}
                       {result.profile.district && (
                         <Badge variant={'outline'}>
                           {result.profile.district}

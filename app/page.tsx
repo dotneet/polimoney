@@ -60,34 +60,34 @@ export default function Page() {
             key={entry.latestReportId}
           >
             <Card.Root
-              flexDirection={'row'}
-              boxShadow={'xs'}
-              border={'none'}
-              alignItems={'center'}
+              flexDirection="row"
+              boxShadow="xs"
+              border="none"
+              alignItems="center"
             >
               <Image
-                objectFit={'cover'}
-                maxW={'130px'}
+                objectFit="cover"
+                maxW="130px"
                 src={entry.profile.image}
                 alt={entry.profile.name}
-                borderTopLeftRadius={'md'}
-                borderBottomLeftRadius={'md'}
+                borderTopLeftRadius="md"
+                borderBottomLeftRadius="md"
               />
               <Box>
                 <Card.Body>
                   <Stack gap={0}>
-                    <Text fontSize={'xs'}>{entry.profile.title}</Text>
-                    <Text fontSize={'2xl'} fontWeight={'bold'}>
+                    <Text fontSize="xs">{entry.profile.title}</Text>
+                    <Text fontSize="2xl" fontWeight="bold">
                       {entry.profile.name}
                     </Text>
                     <HStack mt={1}>
                       {entry.profile.party && (
-                        <Badge variant={'outline'} colorPalette={'red'}>
+                        <Badge variant="outline" colorPalette="red">
                           {entry.profile.party}
                         </Badge>
                       )}
                       {entry.profile.district && (
-                        <Badge variant={'outline'}>
+                        <Badge variant="outline">
                           {entry.profile.district}
                         </Badge>
                       )}
